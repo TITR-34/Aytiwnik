@@ -2,8 +2,9 @@ services:
   - type: web
     name: aytiwnik-api
     runtime: node
+    plan: free
     rootDir: .
-    buildCommand: npm install && npm run build -w apps/api
+    buildCommand: npm install --include=dev && npm run build -w apps/api
     startCommand: npm run start -w apps/api
     healthCheckPath: /health
     envVars:
@@ -23,7 +24,7 @@ services:
     name: aytiwnik-web
     runtime: static
     rootDir: .
-    buildCommand: npm install && npm run build -w apps/web
+    buildCommand: npm install --include=dev && npm run build -w apps/web
     staticPublishPath: apps/web/dist
     routes:
       - type: rewrite
