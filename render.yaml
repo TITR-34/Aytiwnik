@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: aytiwnik-api
+    runtime: node
+    rootDir: .
+    buildCommand: npm install && npm run build -w apps/api
+    startCommand: npm run start -w apps/api
+    healthCheckPath: /health
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: CORS_ORIGINS
+        sync: false
+      - key: NODE_VERSION
+        value: 20
+  - type: web
+    name: aytiwnik-web
+    runtime: static
+    rootDir: .
+    buildCommand: npm install && npm run build -w apps/web
+    staticPublishPath: apps/web/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+      - key: VITE_API_URL
+        sync: false

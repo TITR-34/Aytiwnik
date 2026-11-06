@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* THEME: change these to restyle the whole site (dark, app.examination.az-like) */
+  --brand: 59 130 246;
+  --brand-dark: 37 99 235;
+  --brand-soft: 30 41 74;
+  --ink: 241 245 249;
+  --muted: 148 163 184;
+  --line: 42 49 66;
+  --surface: 15 20 33;
+  --card: 26 32 48;
+  color-scheme: dark;
+}
+body { @apply bg-surface text-ink font-sans antialiased; }
+
+@layer components {
+  .card { @apply rounded-2xl border border-line bg-card p-5; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand; }
+  .btn-primary { @apply btn bg-brand text-white hover:bg-brand-dark; }
+  .btn-ghost { @apply btn border border-line bg-card text-ink hover:bg-white/5; }
+  .btn-danger { @apply btn border border-red-500/30 text-red-400 hover:bg-red-500/10; }
+  .input { @apply w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20; }
+  .label { @apply mb-1 block text-sm font-medium; }
+  .badge { @apply inline-flex items-center rounded-full bg-brand-soft px-2.5 py-0.5 text-xs font-medium text-blue-300; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
